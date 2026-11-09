@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy wash | Car wash &amp; detailing in Suomenoja, Espoo</title>
+<meta name="description" content="Happy wash, hand car wash and detailing at Hannuksenpelto 2B, Suomenoja, Espoo. Book by phone: +358 44 2444140.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --charcoal: #1e293b;
+    --charcoal-deep: #0f172a;
+    --steel: #64748b;
+    --steel-light: #cbd5e1;
+    --line: #d7dee7;
+    --amber: #f59e0b;
+    --amber-dark: #b45309;
+    --offwhite: #f6f5f1;
+    --paper: #fffdf8;
+    --ink: #17202c;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    --radius: 6px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--offwhite);
+    color: var(--ink);
+    line-height: 1.55;
+    font-size: 16px;
+  }
+
+  h1, h2, h3, .brand-name {
+    font-family: "Archivo", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    letter-spacing: 0.01em;
+  }
+
+  img { display: block; max-width: 100%; }
+
+  a { color: inherit; }
+
+  .mono { font-family: var(--mono); font-size: 0.92em; }
+
+  /* ---------- Mobile top bar ---------- */
+  .topbar {
+    display: none;
+    background: var(--charcoal);
+    color: #fff;
+    padding: 10px 16px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    border-bottom: 3px solid var(--amber);
+  }
+  .topbar .tb-name {
+    font-family: "Archivo", system-ui, sans-serif;
+    font-weight: 800;
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .topbar .tb-name span { color: var(--amber); }
+  .btn-call {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--amber);
+    color: var(--charcoal-deep);
+    font-weight: 700;
+    text-decoration: none;
+    padding: 9px 16px;
+    border-radius: var(--radius);
+    font-size: 0.95rem;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .btn-call:hover { background: #fbbf24; }
+  .btn-call svg { flex: 0 0 auto; }
+
+  /* ---------- Page layout ---------- */
+  .layout {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 330px 1fr;
+    gap: 0;
+    min-height: 100vh;
+  }
+
+  /* ---------- Sticky sidebar ---------- */
+  .sidebar {
+    background: var(--charcoal);
+    color: #e6eaf0;
+    border-right: 4px solid var(--amber);
+  }
+  .sidebar-inner {
+    position: sticky;
+    top: 0;
+    padding: 36px 30px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    min-height: 100vh;
+  }
+
+  .brand-mark {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .brand-mark .drop {
+    width: 34px; height: 34px;
+    background: var(--amber);
+    border-radius: 4px;
+    display: grid;
+    place-items: center;
+    color: var(--charcoal-deep);
+  }
+  .brand-name {
+    font-size: 2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.05;
+    color: #fff;
+  }
+  .brand-name em { font-style: normal; color: var(--amber); }
+
+  .brand-tag {
+    color: var(--steel-light);
+    font-size: 0.95rem;
+    max-width: 24ch;
+  }
+
+  .side-block {
+    border-top: 1px solid #334155;
+    padding-top: 18px;
+  }
+  .side-label {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--amber);
+    margin-bottom: 8px;
+  }
+
+  .side-phone {
+    display: block;
+    font-family: var(--mono);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #fff;
+    text-decoration: none;
+    margin-bottom: 14px;
+  }
+  .side-phone:hover { color: var(--amber); }
+
+  .btn-call.side { justify-content: center; width: 100%; font-size: 1rem; padding: 12px 16px; }
+
+  .hours-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+  }
+  .hours-table td { padding: 5px 0; vertical-align: top; }
+  .hours-table td:last-child {
+    text-align: right;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: #e6eaf0;
+  }
+  .hours-table .days { color: var(--steel-light); }
+  .hours-table .closed td:last-child { color: #94a3b8; }
+
+  .open-now {
+    margin-top: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: 1px solid #334155;
+    color: var(--steel-light);
+  }
+  .open-now .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #94a3b8;
+  }
+  .open-now.is-open { color: #bbf7d0; border-color: #166534; }
+  .open-now.is-open .dot { background: #22c55e; }
+  .open-now.is-closed { color: #fecaca; border-color: #7f1d1d; }
+  .open-now.is-closed .dot { background: #ef4444; }
+
+  .side-address {
+    font-size: 0.95rem;
+    color: #e6eaf0;
+    line-height: 1.6;
+  }
+  .side-address .mono { color: var(--steel-light); font-size: 0.85rem; }
+  .directions {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+    color: var(--amber);
+    font-weight: 600;
+    font-size: 0.92rem;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+  .directions:hover { border-bottom-color: var(--amber); }
+
+  .side-note {
+    margin-top: auto;
+    font-size: 0.82rem;
+    color: #94a3b8;
+    border-top: 1px solid #334155;
+    padding-top: 16px;
+  }
+
+  /* ---------- Main column ---------- */
+  .main {
+    padding: 0 0 60px;
+  }
+
+  .main-head {
+    background: var(--charcoal-deep);
+    color: #fff;
+    padding: 34px 44px;
+    border-bottom: 4px solid var(--amber);
+  }
+  .main-head .kicker {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--amber);
+    margin-bottom: 10px;
+  }
+  .main-head h1 {
+    font-size: clamp(1.6rem, 3.2vw, 2.3rem);
+    font-weight: 800;
+    line-height: 1.15;
+    max-width: 22ch;
+  }
+  .main-head p {
+    margin-top: 12px;
+    color: var(--steel-light);
+    max-width: 60ch;
+    font-size: 1rem;
+  }
+
+  .section {
+    padding: 44px 44px 8px;
+  }
+  .section-title {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 6px;
+  }
+  .section-title h2 {
+    font-size: 1.35rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--charcoal);
+  }
+  .section-title .rule {
+    flex: 1;
+    border-top: 2px solid var(--charcoal);
+    opacity: 0.15;
+    transform: translateY(-4px);
+  }
+  .section-sub {
+    color: var(--steel);
+    font-size: 0.95rem;
+    margin-bottom: 22px;
+    max-width: 62ch;
+  }
+
+  /* ---------- Price menu ---------- */
+  .menu-board {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-top: 4px solid var(--amber);
+    border-radius: var(--radius);
+    padding: 8px 26px 14px;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+  }
+  .menu-group { padding: 14px 0 6px; }
+  .menu-group + .menu-group { border-top: 1px dashed var(--line); }
+  .menu-group h3 {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--amber-dark);
+    margin-bottom: 10px;
+  }
+  .menu-item {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: baseline;
+    gap: 10px;
+    padding: 9px 0;
+  }
+  .menu-item .name {
+    font-weight: 700;
+    color: var(--charcoal);
+    font-size: 1.02rem;
+  }
+  .menu-item .leader {
+    border-bottom: 2px dotted #b6c1cd;
+    transform: translateY(-4px);
+  }
+  .menu-item .price {
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--charcoal-deep);
+    white-space: nowrap;
+  }
+  .menu-item .price .from {
+    font-size: 0.72rem;
+    color: var(--steel);
+    font-weight: 400;
+    margin-right: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .menu-item .desc {
+    grid-column: 1 / -1;
+    color: var(--steel);
+    font-size: 0.9rem;
+    margin-top: -4px;
+    max-width: 62ch;
+  }
+  .menu-foot {
+    padding: 12px 0 6px;
+    border-top: 1px solid var(--line);
+    font-size: 0.85rem;
+    color: var(--steel);
+  }
+  .menu-foot strong { color: var(--charcoal); }
+
+  /* ---------- Photo band ---------- */
+  .photo-band {
+    margin: 40px 0 0;
+    position: relative;
+    background: var(--charcoal-deep);
+  }
+  .photo-band img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    background-color: var(--charcoal);
+  }
+  .photo-band figcaption {
+    position: absolute;
+    left: 0; bottom: 0;
+    background: var(--charcoal-deep);
+    color: #fff;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 8px 14px;
+    border-top: 3px solid var(--amber);
+  }
+
+  .band-strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .band-strip figure {
+    background: var(--charcoal);
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--line);
+  }
+  .band-strip img {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+    background-color: #334155;
+  }
+  .band-strip figcaption {
+    background: var(--charcoal);
+    color: var(--steel-light);
+    font-size: 0.85rem;
+    padding: 10px 14px;
+    border-top: 3px solid var(--amber);
+  }
+
+  /* ---------- How a visit works ---------- */
+  .steps {
+    list-style: none;
+    counter-reset: step;
+    display: grid;
+    gap: 0;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: #fff;
+    overflow: hidden;
+  }
+  .steps li {
+    counter-increment: step;
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 18px;
+    padding: 20px 24px;
+    align-items: start;
+  }
+  .steps li + li { border-top: 1px solid var(--line); }
+  .steps li::before {
+    content: counter(step, decimal-leading-zero);
+    font-family: var(--mono);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--amber-dark);
+    background: #fef3c7;
+    border: 1px solid #fcd34d;
+    border-radius: 4px;
+    text-align: center;
+    padding: 8px 0;
+  }
+  .steps h3 {
+    font-size: 1.05rem;
+    color: var(--charcoal);
+    margin-bottom: 4px;
+  }
+  .steps p { color: var(--steel); font-size: 0.93rem; max-width: 58ch; }
+  .steps .mono { color: var(--charcoal); }
+
+  /* ---------- Practical info ---------- */
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .info-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--amber);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+  }
+  .info-card h3 {
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--charcoal);
+    margin-bottom: 8px;
+  }
+  .info-card p, .info-card li { font-size: 0.92rem; color: var(--steel); }
+  .info-card ul { list-style: none; }
+  .info-card li { padding: 3px 0; }
+  .info-card li::before {
+    content: "";
+    display: inline-block;
+    width: 7px; height: 7px;
+    background: var(--amber);
+    margin-right: 9px;
+    border-radius: 2px;
+    vertical-align: 1px;
+  }
+
+  /* ---------- Contact form ---------- */
+  .contact-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 28px;
+    background: var(--charcoal);
+    border-radius: var(--radius);
+    padding: 32px;
+    color: #e6eaf0;
+    border-top: 4px solid var(--amber);
+  }
+  .contact-wrap h2 {
+    color: #fff;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .contact-wrap .contact-copy { font-size: 0.95rem; color: var(--steel-light); }
+  .contact-wrap .contact-copy .mono {
+    display: block;
+    margin-top: 14px;
+    color: #fff;
+    font-size: 1.1rem;
+    text-decoration: none;
+  }
+  .contact-wrap .contact-copy .mono:hover { color: var(--amber); }
+
+  form.booking { display: grid; gap: 14px; }
+  .field label {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--amber);
+    margin-bottom: 6px;
+  }
+  .field input, .field textarea {
+    width: 100%;
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 4px;
+    color: #fff;
+    padding: 11px 12px;
+    font: inherit;
+    font-size: 0.95rem;
+  }
+  .field input:focus, .field textarea:focus {
+    outline: 2px solid var(--amber);
+    outline-offset: 0;
+    border-color: var(--amber);
+  }
+  .field textarea { resize: vertical; min-height: 110px; }
+  .btn-submit {
+    background: var(--amber);
+    color: var(--charcoal-deep);
+    font-weight: 700;
+    font-size: 1rem;
+    border: none;
+    border-radius: var(--radius);
+    padding: 13px 18px;
+    cursor: pointer;
+    text-align: left;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    justify-self: start;
+  }
+  .btn-submit:hover { background: #fbbf24; }
+  .form-note { font-size: 0.8rem; color: #94a3b8; }
+  .form-confirm {
+    display: none;
+    background: #052e16;
+    border: 1px solid #166534;
+    border-left: 4px solid #22c55e;
+    color: #bbf7d0;
+    border-radius: 4px;
+    padding: 14px 16px;
+    font-size: 0.95rem;
+  }
+  .form-confirm.show { display: block; }
+  .form-confirm strong { color: #fff; }
+
+  /* ---------- Footer ---------- */
+  footer {
+    margin-top: 48px;
+    background: var(--charcoal-deep);
+    color: var(--steel-light);
+    padding: 30px 44px;
+    font-size: 0.88rem;
+  }
+  footer .foot-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px 40px;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  footer .f-name {
+    font-family: "Archivo", system-ui, sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #fff;
+    letter-spacing: 0.04em;
+  }
+  footer a { color: var(--amber); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  footer .demo {
+    width: 100%;
+    border-top: 1px solid #334155;
+    margin-top: 16px;
+    padding-top: 14px;
+    color: #94a3b8;
+    font-size: 0.8rem;
+  }
+
+  /* ---------- Scroll reveal ---------- */
+  .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    html { scroll-behavior: auto; }
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar { display: none; }
+    .topbar { display: flex; }
+    .main-head { padding: 28px 22px; }
+    .section { padding: 34px 22px 6px; }
+    footer { padding: 26px 22px; }
+    .contact-wrap { grid-template-columns: 1fr; padding: 26px 22px; }
+    .info-grid { grid-template-columns: 1fr; }
+    .band-strip { grid-template-columns: 1fr; }
+    .photo-band img { height: 230px; }
+  }
+  @media (max-width: 420px) {
+    .menu-item .name { font-size: 0.95rem; }
+    .menu-item .price { font-size: 0.92rem; }
+    .steps li { grid-template-columns: 48px 1fr; padding: 16px 16px; gap: 12px; }
+    .topbar .tb-name { font-size: 0.95rem; }
+    .btn-call { padding: 8px 12px; font-size: 0.88rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Mobile top bar -->
+<div class="topbar">
+  <div class="tb-name">Happy <span>wash</span></div>
+  <a class="btn-call" href="tel:+358442444140">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    Call us
+  </a>
+</div>
+
+<div class="layout">
+
+  <!-- Sticky sidebar (desktop) -->
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+      <div>
+        <div class="brand-mark">
+          <span class="drop" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C12 2 5 10.5 5 15a7 7 0 0 0 14 0C19 10.5 12 2 12 2z"/></svg>
+          </span>
+        </div>
+        <div class="brand-name">Happy <em>wash</em></div>
+        <p class="brand-tag">Hand car wash and careful detailing in Suomenoja, Espoo.</p>
+      </div>
+
+      <div class="side-block">
+        <div class="side-label">Book by phone</div>
+        <a class="side-phone" href="tel:+358442444140">+358 44 2444140</a>
+        <a class="btn-call side" href="tel:+358442444140">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Call to book
+        </a>
+      </div>
+
+      <div class="side-block">
+        <div class="side-label">Opening hours</div>
+        <table class="hours-table">
+          <tr><td class="days">Mon-Fri</td><td>09:00-17:00</td></tr>
+          <tr><td class="days">Sat</td><td>10:00-15:00</td></tr>
+          <tr class="closed"><td class="days">Sun</td><td>closed</td></tr>
+        </table>
+        <div class="open-now" id="openNow"><span class="dot"></span><span id="openNowText">Checking hours</span></div>
+      </div>
+
+      <div class="side-block">
+        <div class="side-label">Find us</div>
+        <p class="side-address">
+          Hannuksenpelto 2B<br>
+          <span class="mono">02270 Espoo</span><br>
+          Suomenoja / Friisinmäki
+        </p>
+        <a class="directions" href="https://www.google.com/maps/place/Happy+wash/@60.1540517,24.6968065" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Get directions
+        </a>
+      </div>
+
+      <p class="side-note">Hand wash only, no brush machines. We take our time with every car.</p>
+    </div>
+  </aside>
+
+  <!-- Main scrolling column -->
+  <main class="main">
+
+    <header class="main-head">
+      <div class="kicker">Car wash &amp; detailing · Suomenoja, Espoo</div>
+      <h1>A proper hand wash at Hannuksenpelto, five minutes from Länsiväylä.</h1>
+      <p>Happy wash sits in the Hannuksenpelto business cluster near Suomenoja and Friisinmäki, easy to reach from Länsiväylä whether you are coming from Helsinki or Kirkkonummi. Every car is washed by hand, booked by phone, and finished while you wait.</p>
+    </header>
+
+    <!-- Price menu -->
+    <section class="section reveal" id="menu">
+      <div class="section-title">
+        <h2>Wash &amp; detailing menu</h2>
+        <span class="rule"></span>
+      </div>
+      <p class="section-sub">Prices are starting prices for a standard passenger car. Vans, SUVs and heavily soiled vehicles are quoted on arrival. All prices include VAT.</p>
+
+      <div class="menu-board">
+        <div class="menu-group">
+          <h3>Exterior</h3>
+          <div class="menu-item">
+            <span class="name">Exterior hand wash</span>
+            <span class="leader"></span>
+            <span class="price"><span class="from">from</span>25 €</span>
+            <span class="desc">Foam pre-soak, hand wash with the two-bucket method, wheel faces and arches, hand dried with microfibre. No brushes, no swirl marks.</span>
+          </div>
+          <div class="menu-item">
+            <span class="name">Hand wash + spray wax</span>
+            <span class="leader"></span>
+            <span class="price"><span class="from">from</span>39 €</span>
+            <span class="desc">Full exterior hand wash finished with a spray sealant for gloss and water beading. Good maintenance between bigger details.</span>
+          </div>
+          <div class="menu-item">
+            <span class="name">Hand wax, paste wax</span>
+            <span class="leader"></span>
+            <span class="price"><span class="from">from</span>79 €</span>
+            <span class="desc">Hand wash, chemical decontamination, then a proper paste wax applied and buffed by hand. Three to four months of protection.</span>
+          </div>
+        </div>
+
+        <div class="menu-group">
+          <h3>Interior</h3>
+          <div class="menu-item">
+            <span class="name">Interior wash</span>
+            <span class="leader"></span>
+            <span class="price"><span class="from">from</span>35 €</span>
+            <span class="desc">Thorough vacuum including boot, dashboard and trim wipe-down, door sills, interior glass. Seats and mats brushed out.</span>
+          </div>
+          <div class="menu-item">
+            <span class="name">Interior deep clean</span>
+            <span class="leader"></span>
+            <span class="price"><span class="from">from</span>95 €</span>
+            <span class="desc">Everything in the interior wash plus seat and carpet shampoo, steam on touch points, leather cleaned and conditioned where fitted.</span>
+          </div>
+          <div class="menu-item">
+            <span class="name">Pet hair removal</span>
+            <span class="leader"></span>
+            <span class="price"><span class="from">from</span>30 €</span>
+            <span class="desc">Add-on to any interior service. Rubber brushes and compressed air to lift embedded hair from seats, carpets and boot.</span>
+          </div>
+        </div>
+
+        <div class="menu-group">
+          <h3>Packages</h3>
+          <div class="menu-item">
+            <span class="name">Wash inside &amp; out</span>
+            <span class="leader"></span>
+            <span class="price"><span class="from">from</span>55 €</span>
+            <span class="desc">Exterior hand wash and the full interior wash in one visit. Our most booked package, done in about an hour.</span>
+          </div>
+          <div class="menu-item">
+            <span class="name">Full detailing</span>
+            <span class="leader"></span>
+            <span class="price"><span class="from">from</span>189 €</span>
+            <span class="desc">Interior deep clean, exterior hand wash, decontamination, machine polish of light defects, paste wax, glass sealed, tyres dressed. Plan for half a day.</span>
+          </div>
+          <div class="menu-item">
+            <span class="name">Engine bay cleaning</span>
+            <span class="leader"></span>
+            <span class="price"><span class="from">from</span>45 €</span>
+            <span class="desc">Careful degrease and rinse with electrics protected, plastics dressed. Sensible before selling the car.</span>
+          </div>
+          <div class="menu-item">
+            <span class="name">Headlight polishing</span>
+            <span class="leader"></span>
+            <span class="price"><span class="from">from</span>40 €</span>
+            <span class="desc">Both headlights wet-sanded, polished and sealed. Restores cloudy lenses and improves night visibility.</span>
+          </div>
+        </div>
+
+        <p class="menu-foot"><strong>Booking:</strong> call <span class="mono">+358 44 2444140</span> and we agree a time. Drive-ins are welcome when a bay is free, but a phone booking guarantees your slot.</p>
+      </div>
+    </section>
+
+    <!-- Wide photo band -->
+    <figure class="photo-band reveal">
+      <img src="https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&amp;fit=crop&amp;w=1600&amp;q=70" alt="Car being hand washed with foam" loading="lazy" onerror="this.style.display='none'">
+      <figcaption>Hand washed, every panel</figcaption>
+    </figure>
+
+    <!-- How a visit works -->
+    <section class="section reveal" id="visit">
+      <div class="section-title">
+        <h2>How a visit works</h2>
+        <span class="rule"></span>
+      </div>
+      <p class="section-sub">No apps, no queues at a machine. Four steps and you drive out with a clean car.</p>
+
+      <ol class="steps">
+        <li>
+          <div>
+            <h3>Call and book a time</h3>
+            <p>Ring <span class="mono">+358 44 2444140</span> during opening hours. Tell us the car and what it needs, and we give you a time and an honest price on the phone.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Drive in to Hannuksenpelto</h3>
+            <p>We are at Hannuksenpelto 2B in the Suomenoja business cluster, a couple of minutes from the Länsiväylä exit. Free parking right outside the door.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Pick a package, confirm the price</h3>
+            <p>We walk around the car together, agree the package and the final price before any work starts. No surprises when you pay.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Coffee while you wait</h3>
+            <p>A standard wash takes 30 to 60 minutes. Have a coffee in our waiting corner or take a walk to the Suomenoja shore. Full detailing is best left with us for the morning.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- Two-photo strip -->
+    <section class="section reveal" aria-label="Workshop photos">
+      <div class="band-strip">
+        <figure>
+          <img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&amp;fit=crop&amp;w=900&amp;q=70" alt="Detailing a car interior" loading="lazy" onerror="this.style.display='none'">
+          <figcaption>Interior detailing, done by hand</figcaption>
+        </figure>
+        <figure>
+          <img src="https://images.unsplash.com/photo-1552930294-6b595f4c2974?auto=format&amp;fit=crop&amp;w=900&amp;q=70" alt="Rinsing a car with a pressure hose" loading="lazy" onerror="this.style.display='none'">
+          <figcaption>Foam, rinse, hand dry</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Practical info -->
+    <section class="section reveal" id="info">
+      <div class="section-title">
+        <h2>Good to know</h2>
+        <span class="rule"></span>
+      </div>
+      <div class="info-grid">
+        <div class="info-card">
+          <h3>Payment &amp; practicalities</h3>
+          <ul>
+            <li>Cards, MobilePay and cash accepted</li>
+            <li>Free customer parking at the door</li>
+            <li>Coffee and waiting corner on site</li>
+            <li>Company invoicing on request</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h3>When to book ahead</h3>
+          <ul>
+            <li>Full detailing: always book by phone</li>
+            <li>Saturday mornings fill up first</li>
+            <li>Spring pollen season: book 2-3 days ahead</li>
+            <li>Same-day slots often free midweek</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact form -->
+    <section class="section reveal" id="contact">
+      <div class="contact-wrap">
+        <div class="contact-copy">
+          <h2>Book a wash</h2>
+          <p>The fastest way is the phone: tell us the car and the package, and you get a time straight away. If you prefer, leave a message here and we call or email you back during opening hours.</p>
+          <a class="mono" href="tel:+358442444140">+358 44 2444140</a>
+          <p class="form-note" style="margin-top:14px;">Mon-Fri 09:00-17:00, Sat 10:00-15:00, Sun closed</p>
+        </div>
+        <form class="booking" id="bookingForm" novalidate>
+          <div class="field">
+            <label for="f-name">Name</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="f-contact">Phone or email</label>
+            <input id="f-contact" name="contact" type="text" autocomplete="tel" required>
+          </div>
+          <div class="field">
+            <label for="f-msg">Message</label>
+            <textarea id="f-msg" name="message" placeholder="Car model, package you are interested in, preferred day and time" required></textarea>
+          </div>
+          <button class="btn-submit" type="submit">
+            Send booking request
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+          <p class="form-note">This demo form shows a confirmation only. No data is sent anywhere.</p>
+          <div class="form-confirm" id="formConfirm" role="status"></div>
+        </form>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <div class="foot-grid">
+    <span class="f-name">Happy wash</span>
+    <span>Hannuksenpelto 2B, 02270 Espoo</span>
+    <span><a href="tel:+358442444140">+358 44 2444140</a></span>
+    <span class="mono">Mon-Fri 09:00-17:00 · Sat 10:00-15:00 · Sun closed</span>
+  </div>
+  <p class="demo">Demo website. Car wash and detailing in Suomenoja, Espoo. <a href="https://www.google.com/maps/place/Happy+wash/@60.1540517,24.6968065" target="_blank" rel="noopener">Get directions</a>.</p>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  // Open now indicator: Mon-Fri 09:00-17:00, Sat 10:00-15:00, Sun closed
+  var el = document.getElementById("openNow");
+  var txt = document.getElementById("openNowText");
+  if (el && txt) {
+    var now = new Date();
+    var day = now.getDay(); // 0 = Sunday
+    var mins = now.getHours() * 60 + now.getMinutes();
+    var open = false;
+    if (day >= 1 && day <= 5) { open = mins >= 540 && mins < 1020; }
+    else if (day === 6) { open = mins >= 600 && mins < 900; }
+    el.classList.add(open ? "is-open" : "is-closed");
+    if (open) {
+      txt.textContent = day === 6 ? "Open now, closes 15:00" : "Open now, closes 17:00";
+    } else {
+      var next;
+      if (day === 0) { next = "Closed, opens Mon 09:00"; }
+      else if (day === 6) { next = mins < 600 ? "Closed, opens 10:00" : "Closed, opens Mon 09:00"; }
+      else { next = mins < 540 ? "Closed, opens 09:00" : (day === 5 ? "Closed, opens Sat 10:00" : "Closed, opens 09:00"); }
+      txt.textContent = next;
+    }
+  }
+
+  // Booking form: inline confirmation, no backend
+  var form = document.getElementById("bookingForm");
+  var confirmBox = document.getElementById("formConfirm");
+  if (form && confirmBox) {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var name = form.name.value.trim();
+      var contact = form.contact.value.trim();
+      var msg = form.message.value.trim();
+      if (!name || !contact || !msg) {
+        confirmBox.classList.add("show");
+        confirmBox.innerHTML = "<strong>Almost there.</strong> Please fill in your name, a phone number or email, and a short message.";
+        return;
+      }
+      confirmBox.classList.add("show");
+      confirmBox.innerHTML = "<strong>Thank you, " + name.replace(/[<>&]/g, "") + ".</strong> Your booking request is noted. In a live version we would call or email you back during opening hours. For an immediate booking, call <span class='mono'>+358 44 2444140</span>.";
+      form.reset();
+    });
+  }
+
+  // Restrained scroll reveal
+  var reveals = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window && reveals.length) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    reveals.forEach(function (n) { io.observe(n); });
+  } else {
+    reveals.forEach(function (n) { n.classList.add("visible"); });
+  }
+})();
+</script>
+</body>
+</html>
